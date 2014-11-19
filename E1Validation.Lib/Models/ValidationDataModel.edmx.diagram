@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="99f18688c0654763b2341a23cc3e4a76" Name="Diagram1" ZoomLevel="86">
+        <EntityTypeShape EntityType="E1ValidationManagerModel.Conversion" Width="1.5" PointX="0.5" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="E1ValidationManagerModel.Error" Width="1.5" PointX="8.75" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="E1ValidationManagerModel.Sample" Width="1.5" PointX="4.625" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="E1ValidationManagerModel.Site" Width="1.5" PointX="6.75" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="E1ValidationManagerModel.SourceTable" Width="1.875" PointX="4.375" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="E1ValidationManagerModel.TableJoin" Width="2.25" PointX="7.5" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="E1ValidationManagerModel.Table" Width="1.875" PointX="2.25" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="E1ValidationManagerModel.FieldDetail" Width="1.5" PointX="13.25" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="E1ValidationManagerModel.FieldType" Width="1.5" PointX="15.5" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="E1ValidationManagerModel.IndexField" Width="1.5" PointX="15.5" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="E1ValidationManagerModel.IndexHeader" Width="1.5" PointX="13.25" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="E1ValidationManagerModel.tblJonOpr" Width="1.5" PointX="17.625" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="E1ValidationManagerModel.tblJonTyp" Width="1.5" PointX="17.625" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="E1ValidationManagerModel.TableField" Width="1.5" PointX="11" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="E1ValidationManagerModel.TableHeader" Width="1.5" PointX="11.125" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="E1ValidationManagerModel.tblVewFld" Width="1.5" PointX="11.125" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="E1ValidationManagerModel.tblVewHdr" Width="1.5" PointX="13.375" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="E1ValidationManagerModel.tblVewJon" Width="1.5" PointX="15.375" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="E1ValidationManagerModel.XRef" Width="1.5" PointX="8.75" PointY="2.125" IsExpanded="true" />
+        <AssociationConnector Association="E1ValidationManagerModel.Table_Conversion" ManuallyRouted="false" />
+        <AssociationConnector Association="E1ValidationManagerModel.Sample_SourceTable" ManuallyRouted="false" />
+        <AssociationConnector Association="E1ValidationManagerModel.Sample_Table" ManuallyRouted="false" />
+        <AssociationConnector Association="E1ValidationManagerModel.Site_Sample" ManuallyRouted="false" />
+        <AssociationConnector Association="E1ValidationManagerModel.SourceTable_Table" ManuallyRouted="false" />
+        <AssociationConnector Association="E1ValidationManagerModel.TableJoin_SourceTable" ManuallyRouted="false" />
+        <AssociationConnector Association="E1ValidationManagerModel.tblFldDet_FK00" ManuallyRouted="false" />
+        <AssociationConnector Association="E1ValidationManagerModel.tblTblFld_FK01" ManuallyRouted="false" />
+        <AssociationConnector Association="E1ValidationManagerModel.tblVewFld_FK01" ManuallyRouted="false" />
+        <AssociationConnector Association="E1ValidationManagerModel.tblIdxFld_FK00" ManuallyRouted="false" />
+        <AssociationConnector Association="E1ValidationManagerModel.tblIdxHdr_FK00" ManuallyRouted="false" />
+        <AssociationConnector Association="E1ValidationManagerModel.tblVewJon_FK01" ManuallyRouted="false" />
+        <AssociationConnector Association="E1ValidationManagerModel.tblVewJon_FK02" ManuallyRouted="false" />
+        <AssociationConnector Association="E1ValidationManagerModel.tblTblFld_FK00" ManuallyRouted="false" />
+        <AssociationConnector Association="E1ValidationManagerModel.tblVewFld_FK00" ManuallyRouted="false" />
+        <AssociationConnector Association="E1ValidationManagerModel.tblVewJon_FK00" ManuallyRouted="false" />
+        <AssociationConnector Association="E1ValidationManagerModel.TableJoinTableField" />
+        <AssociationConnector Association="E1ValidationManagerModel.SourceField" />
+        <EntityTypeShape EntityType="E1ValidationManagerModel.TableFields" Width="2" PointX="2.375" PointY="13.625" />
+        <EntityTypeShape EntityType="E1ValidationManagerModel.SampleTemplate" Width="2.625" PointX="0.625" PointY="9.875" />
+        <AssociationConnector Association="E1ValidationManagerModel.SampleTemplate_Table" />
+        <EntityTypeShape EntityType="E1ValidationManagerModel.UserSampleTemplate" Width="2.5" PointX="4.375" PointY="9.875" />
+        <AssociationConnector Association="E1ValidationManagerModel.UserSampleTemplate_Table" />
+        <AssociationConnector Association="E1ValidationManagerModel.UserSampleTemplateTableFields" />
+        <AssociationConnector Association="E1ValidationManagerModel.SampleTemplateTableFields" />
+        <EntityTypeShape EntityType="E1ValidationManagerModel.SampleValue" Width="1.5" PointX="8.125" PointY="10.25" />
+        <AssociationConnector Association="E1ValidationManagerModel.SampleValue_Sample" />
+        <AssociationConnector Association="E1ValidationManagerModel.SampleValue_TableJoin" />
+        <AssociationConnector Association="E1ValidationManagerModel.SourceTableTableHeader" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

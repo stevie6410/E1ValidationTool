@@ -1,0 +1,1710 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="E1ValidationManagerModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Conversions">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RowVersion" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+          <Property Name="Code" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="DisplayName" Type="nvarchar" MaxLength="255" />
+          <Property Name="Owner" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Errors">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ErrorMessage" Type="nvarchar(max)" />
+          <Property Name="User" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Samples">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RowVersion" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+          <Property Name="SampleName" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+          <Property Name="Sample_Table1" Type="int" Nullable="false" />
+          <Property Name="Sample_SourceTable" Type="int" Nullable="false" />
+          <Property Name="Site_Sample" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SampleTemplates">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RowVersion" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+          <Property Name="TableField_TableName" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="TableField_FieldName" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="SampleTemplate_Table" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SampleValues">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RowVersion" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+          <Property Name="TableValue" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="FieldName" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="SampleValue_Sample" Type="int" Nullable="false" />
+          <Property Name="SampleValue_TableJoin" Type="int" />
+        </EntityType>
+        <EntityType Name="Sites">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RowVersion" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+          <Property Name="CompanyNumber" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="SiteName" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Owner" Type="nvarchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SourceTables">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RowVersion" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+          <Property Name="SourceTableName" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="IsE1" Type="bit" Nullable="false" />
+          <Property Name="PrimarySource" Type="bit" />
+          <Property Name="ConvTableSource_ConvTable" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TableJoins">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RowVersion" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+          <Property Name="SourceFieldName" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="ConvFieldName" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="SourceTableName" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="ConvTableName" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="TableJoins_SourceTables" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tables">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RowVersion" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+          <Property Name="TableName" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Status" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Priority" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Notes" Type="nvarchar(max)" />
+          <Property Name="HasConversionDoc" Type="bit" Nullable="false" />
+          <Property Name="IssueScreenshot" Type="varbinary(max)" />
+          <Property Name="UseSampleData" Type="bit" Nullable="false" />
+          <Property Name="GetSampleDatafromE1" Type="bit" />
+          <Property Name="Table_Conversion" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblFldDet">
+          <Key>
+            <PropertyRef Name="FldAlias" />
+          </Key>
+          <Property Name="FldAlias" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="FldDesc" Type="nvarchar" MaxLength="40" />
+          <Property Name="FldLength" Type="float" />
+          <Property Name="FldDecml" Type="int" />
+          <Property Name="FldTyp" Type="smallint" />
+          <Property Name="FldDataItm" Type="nvarchar" MaxLength="40" />
+          <Property Name="FldSys" Type="nvarchar" MaxLength="4" />
+          <Property Name="FldUDC" Type="nvarchar" MaxLength="7" />
+          <Property Name="FldNN" Type="nvarchar" MaxLength="7" />
+        </EntityType>
+        <EntityType Name="tblFldTyp">
+          <Key>
+            <PropertyRef Name="FldTyp" />
+          </Key>
+          <Property Name="FldTyp" Type="smallint" Nullable="false" />
+          <Property Name="FldTypDesc" Type="nvarchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="tblIdxFld">
+          <Key>
+            <PropertyRef Name="TblId" />
+            <PropertyRef Name="IdxId" />
+            <PropertyRef Name="IdxPos" />
+          </Key>
+          <Property Name="TblId" Type="nvarchar" MaxLength="12" Nullable="false" />
+          <Property Name="IdxId" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="IdxPos" Type="smallint" Nullable="false" />
+          <Property Name="FldAlias" Type="nvarchar" MaxLength="15" />
+          <Property Name="SortOrdr" Type="nvarchar" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="tblIdxHdr">
+          <Key>
+            <PropertyRef Name="TblId" />
+            <PropertyRef Name="IdxId" />
+          </Key>
+          <Property Name="TblId" Type="nvarchar" MaxLength="12" Nullable="false" />
+          <Property Name="IdxId" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="IdxPrimary" Type="bit" />
+          <Property Name="IdxUnique" Type="bit" />
+          <Property Name="IdxDesc" Type="nvarchar" MaxLength="30" />
+          <Property Name="IdxSeq" Type="smallint" />
+        </EntityType>
+        <EntityType Name="tblJonOpr">
+          <Key>
+            <PropertyRef Name="JoinOperator" />
+          </Key>
+          <Property Name="JoinOperator" Type="nvarchar" MaxLength="2" Nullable="false" />
+          <Property Name="OperatorDisplay" Type="nvarchar" MaxLength="22" />
+        </EntityType>
+        <EntityType Name="tblJonTyp">
+          <Key>
+            <PropertyRef Name="JoinType" />
+          </Key>
+          <Property Name="JoinType" Type="nvarchar" MaxLength="2" Nullable="false" />
+          <Property Name="TypeDisplay" Type="nvarchar" MaxLength="22" />
+        </EntityType>
+        <EntityType Name="tblTblFld">
+          <Key>
+            <PropertyRef Name="TblId" />
+            <PropertyRef Name="FldAlias" />
+          </Key>
+          <Property Name="TblId" Type="nvarchar" MaxLength="12" Nullable="false" />
+          <Property Name="FldAlias" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="FldPos" Type="smallint" />
+          <Property Name="FldIdx" Type="nvarchar" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="tblTblHdr">
+          <Key>
+            <PropertyRef Name="TblId" />
+          </Key>
+          <Property Name="TblId" Type="nvarchar" MaxLength="12" Nullable="false" />
+          <Property Name="TblDesc" Type="nvarchar" MaxLength="60" />
+          <Property Name="TblFldPrefix" Type="nvarchar" MaxLength="2" />
+          <Property Name="TblSy" Type="nvarchar" MaxLength="4" />
+          <Property Name="TblSyr" Type="nvarchar" MaxLength="4" />
+          <Property Name="TblDATP" Type="nvarchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="tblVewFld">
+          <Key>
+            <PropertyRef Name="VewId" />
+            <PropertyRef Name="FldPos" />
+          </Key>
+          <Property Name="VewId" Type="nvarchar" MaxLength="12" Nullable="false" />
+          <Property Name="FldPos" Type="smallint" Nullable="false" />
+          <Property Name="TblId" Type="nvarchar" MaxLength="12" />
+          <Property Name="FldAlias" Type="nvarchar" MaxLength="10" />
+          <Property Name="FldIdx" Type="smallint" />
+        </EntityType>
+        <EntityType Name="tblVewHdr">
+          <Key>
+            <PropertyRef Name="VewId" />
+          </Key>
+          <Property Name="VewId" Type="nvarchar" MaxLength="12" Nullable="false" />
+          <Property Name="VewDesc" Type="nvarchar" MaxLength="60" />
+          <Property Name="VewSy" Type="nvarchar" MaxLength="4" />
+          <Property Name="VewSyr" Type="nvarchar" MaxLength="4" />
+          <Property Name="VewUnion" Type="bit" />
+          <Property Name="VewDistinct" Type="bit" />
+          <Property Name="VewPrim" Type="nvarchar" MaxLength="12" />
+        </EntityType>
+        <EntityType Name="tblVewJon">
+          <Key>
+            <PropertyRef Name="VewId" />
+            <PropertyRef Name="JoinId" />
+          </Key>
+          <Property Name="VewId" Type="nvarchar" MaxLength="12" Nullable="false" />
+          <Property Name="JoinId" Type="smallint" Nullable="false" />
+          <Property Name="TblIdLeft" Type="nvarchar" MaxLength="12" />
+          <Property Name="FldAliasLeft" Type="nvarchar" MaxLength="10" />
+          <Property Name="JoinOperator" Type="nvarchar" MaxLength="2" />
+          <Property Name="JoinType" Type="nvarchar" MaxLength="2" />
+          <Property Name="TblIdRight" Type="nvarchar" MaxLength="12" />
+          <Property Name="FldAliasRight" Type="nvarchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="tblXref">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="WorldValue" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="E1Value" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FieldType" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="TableName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="UserSampleTemplates">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RowVersion" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+          <Property Name="TableField_TableName" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="TableField_FieldName" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="UserSampleDefninition_Table" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'E1ValidationManager.dbo.vw_TableFields' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vw_TableFields">
+          <Key>
+            <PropertyRef Name="TableName" />
+            <PropertyRef Name="FieldName" />
+          </Key>
+          <Property Name="TableName" Type="nvarchar" MaxLength="12" Nullable="false" />
+          <Property Name="FieldName" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="FieldDescription" Type="nvarchar" MaxLength="40" />
+        </EntityType>
+        <Association Name="Sample_SourceTable">
+          <End Role="SourceTables" Type="Self.SourceTables" Multiplicity="1" />
+          <End Role="Samples" Type="Self.Samples" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SourceTables">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Samples">
+              <PropertyRef Name="Sample_SourceTable" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Sample_Table">
+          <End Role="Tables" Type="Self.Tables" Multiplicity="1" />
+          <End Role="Samples" Type="Self.Samples" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tables">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Samples">
+              <PropertyRef Name="Sample_Table1" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="SampleTemplate_Table">
+          <End Role="Tables" Type="Self.Tables" Multiplicity="1" />
+          <End Role="SampleTemplates" Type="Self.SampleTemplates" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tables">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SampleTemplates">
+              <PropertyRef Name="SampleTemplate_Table" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="SampleValue_Sample">
+          <End Role="Samples" Type="Self.Samples" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="SampleValues" Type="Self.SampleValues" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Samples">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SampleValues">
+              <PropertyRef Name="SampleValue_Sample" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="SampleValue_TableJoin">
+          <End Role="TableJoins" Type="Self.TableJoins" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="SampleValues" Type="Self.SampleValues" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TableJoins">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SampleValues">
+              <PropertyRef Name="SampleValue_TableJoin" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Site_Sample">
+          <End Role="Sites" Type="Self.Sites" Multiplicity="1" />
+          <End Role="Samples" Type="Self.Samples" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sites">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Samples">
+              <PropertyRef Name="Site_Sample" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="SourceTable_Table">
+          <End Role="Tables" Type="Self.Tables" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="SourceTables" Type="Self.SourceTables" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tables">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SourceTables">
+              <PropertyRef Name="ConvTableSource_ConvTable" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Table_Conversion">
+          <End Role="Conversions" Type="Self.Conversions" Multiplicity="1" />
+          <End Role="Tables" Type="Self.Tables" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Conversions">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Tables">
+              <PropertyRef Name="Table_Conversion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TableJoin_SourceTable">
+          <End Role="SourceTables" Type="Self.SourceTables" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TableJoins" Type="Self.TableJoins" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SourceTables">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TableJoins">
+              <PropertyRef Name="TableJoins_SourceTables" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="tblFldDet_FK00">
+          <End Role="tblFldTyp" Type="Self.tblFldTyp" Multiplicity="0..1" />
+          <End Role="tblFldDet" Type="Self.tblFldDet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblFldTyp">
+              <PropertyRef Name="FldTyp" />
+            </Principal>
+            <Dependent Role="tblFldDet">
+              <PropertyRef Name="FldTyp" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="tblIdxFld_FK00">
+          <End Role="tblIdxHdr" Type="Self.tblIdxHdr" Multiplicity="1" />
+          <End Role="tblIdxFld" Type="Self.tblIdxFld" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblIdxHdr">
+              <PropertyRef Name="TblId" />
+              <PropertyRef Name="IdxId" />
+            </Principal>
+            <Dependent Role="tblIdxFld">
+              <PropertyRef Name="TblId" />
+              <PropertyRef Name="IdxId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="tblIdxHdr_FK00">
+          <End Role="tblTblHdr" Type="Self.tblTblHdr" Multiplicity="1" />
+          <End Role="tblIdxHdr" Type="Self.tblIdxHdr" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblTblHdr">
+              <PropertyRef Name="TblId" />
+            </Principal>
+            <Dependent Role="tblIdxHdr">
+              <PropertyRef Name="TblId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="tblTblFld_FK00">
+          <End Role="tblTblHdr" Type="Self.tblTblHdr" Multiplicity="1" />
+          <End Role="tblTblFld" Type="Self.tblTblFld" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblTblHdr">
+              <PropertyRef Name="TblId" />
+            </Principal>
+            <Dependent Role="tblTblFld">
+              <PropertyRef Name="TblId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="tblTblFld_FK01">
+          <End Role="tblFldDet" Type="Self.tblFldDet" Multiplicity="1" />
+          <End Role="tblTblFld" Type="Self.tblTblFld" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblFldDet">
+              <PropertyRef Name="FldAlias" />
+            </Principal>
+            <Dependent Role="tblTblFld">
+              <PropertyRef Name="FldAlias" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="tblVewFld_FK00">
+          <End Role="tblVewHdr" Type="Self.tblVewHdr" Multiplicity="1" />
+          <End Role="tblVewFld" Type="Self.tblVewFld" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblVewHdr">
+              <PropertyRef Name="VewId" />
+            </Principal>
+            <Dependent Role="tblVewFld">
+              <PropertyRef Name="VewId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="tblVewFld_FK01">
+          <End Role="tblFldDet" Type="Self.tblFldDet" Multiplicity="0..1" />
+          <End Role="tblVewFld" Type="Self.tblVewFld" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblFldDet">
+              <PropertyRef Name="FldAlias" />
+            </Principal>
+            <Dependent Role="tblVewFld">
+              <PropertyRef Name="FldAlias" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="tblVewJon_FK00">
+          <End Role="tblVewHdr" Type="Self.tblVewHdr" Multiplicity="1" />
+          <End Role="tblVewJon" Type="Self.tblVewJon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblVewHdr">
+              <PropertyRef Name="VewId" />
+            </Principal>
+            <Dependent Role="tblVewJon">
+              <PropertyRef Name="VewId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="tblVewJon_FK01">
+          <End Role="tblJonOpr" Type="Self.tblJonOpr" Multiplicity="0..1" />
+          <End Role="tblVewJon" Type="Self.tblVewJon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblJonOpr">
+              <PropertyRef Name="JoinOperator" />
+            </Principal>
+            <Dependent Role="tblVewJon">
+              <PropertyRef Name="JoinOperator" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="tblVewJon_FK02">
+          <End Role="tblJonTyp" Type="Self.tblJonTyp" Multiplicity="0..1" />
+          <End Role="tblVewJon" Type="Self.tblVewJon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblJonTyp">
+              <PropertyRef Name="JoinType" />
+            </Principal>
+            <Dependent Role="tblVewJon">
+              <PropertyRef Name="JoinType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UserSampleTemplate_Table">
+          <End Role="Tables" Type="Self.Tables" Multiplicity="1" />
+          <End Role="UserSampleTemplates" Type="Self.UserSampleTemplates" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tables">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserSampleTemplates">
+              <PropertyRef Name="UserSampleDefninition_Table" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="sp_GetSiteID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="sitename" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_GetTableJoinIDFromFieldName" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="fieldName" Type="nvarchar" Mode="In" />
+          <Parameter Name="TableName" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_InsertSampleDefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="TableValue" Type="nvarchar" Mode="In" />
+          <Parameter Name="SampleID" Type="int" Mode="In" />
+          <Parameter Name="FieldName" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_InsertSampleRecord" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="TableName" Type="nvarchar" Mode="In" />
+          <Parameter Name="SampleDataName" Type="nvarchar" Mode="In" />
+          <Parameter Name="SiteID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_LogError" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="message" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="user" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="usp_Delete_Samples" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="SiteID" Type="int" Mode="In" />
+          <Parameter Name="TableName" Type="nvarchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="E1ValidationManagerModelStoreContainer">
+          <EntitySet Name="Conversions" EntityType="Self.Conversions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Errors" EntityType="Self.Errors" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Samples" EntityType="Self.Samples" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SampleTemplates" EntityType="Self.SampleTemplates" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SampleValues" EntityType="Self.SampleValues" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sites" EntityType="Self.Sites" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SourceTables" EntityType="Self.SourceTables" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TableJoins" EntityType="Self.TableJoins" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tables" EntityType="Self.Tables" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblFldDet" EntityType="Self.tblFldDet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblFldTyp" EntityType="Self.tblFldTyp" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblIdxFld" EntityType="Self.tblIdxFld" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblIdxHdr" EntityType="Self.tblIdxHdr" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblJonOpr" EntityType="Self.tblJonOpr" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblJonTyp" EntityType="Self.tblJonTyp" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblTblFld" EntityType="Self.tblTblFld" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblTblHdr" EntityType="Self.tblTblHdr" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblVewFld" EntityType="Self.tblVewFld" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblVewHdr" EntityType="Self.tblVewHdr" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblVewJon" EntityType="Self.tblVewJon" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblXref" EntityType="Self.tblXref" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserSampleTemplates" EntityType="Self.UserSampleTemplates" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="vw_TableFields" EntityType="Self.vw_TableFields" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vw_TableFields].[TableName] AS [TableName], 
+    [vw_TableFields].[FieldName] AS [FieldName], 
+    [vw_TableFields].[FieldDescription] AS [FieldDescription]
+    FROM [dbo].[vw_TableFields] AS [vw_TableFields]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="Sample_SourceTable" Association="Self.Sample_SourceTable">
+            <End Role="SourceTables" EntitySet="SourceTables" />
+            <End Role="Samples" EntitySet="Samples" />
+          </AssociationSet>
+          <AssociationSet Name="Sample_Table" Association="Self.Sample_Table">
+            <End Role="Tables" EntitySet="Tables" />
+            <End Role="Samples" EntitySet="Samples" />
+          </AssociationSet>
+          <AssociationSet Name="SampleTemplate_Table" Association="Self.SampleTemplate_Table">
+            <End Role="Tables" EntitySet="Tables" />
+            <End Role="SampleTemplates" EntitySet="SampleTemplates" />
+          </AssociationSet>
+          <AssociationSet Name="SampleValue_Sample" Association="Self.SampleValue_Sample">
+            <End Role="Samples" EntitySet="Samples" />
+            <End Role="SampleValues" EntitySet="SampleValues" />
+          </AssociationSet>
+          <AssociationSet Name="SampleValue_TableJoin" Association="Self.SampleValue_TableJoin">
+            <End Role="TableJoins" EntitySet="TableJoins" />
+            <End Role="SampleValues" EntitySet="SampleValues" />
+          </AssociationSet>
+          <AssociationSet Name="Site_Sample" Association="Self.Site_Sample">
+            <End Role="Sites" EntitySet="Sites" />
+            <End Role="Samples" EntitySet="Samples" />
+          </AssociationSet>
+          <AssociationSet Name="SourceTable_Table" Association="Self.SourceTable_Table">
+            <End Role="Tables" EntitySet="Tables" />
+            <End Role="SourceTables" EntitySet="SourceTables" />
+          </AssociationSet>
+          <AssociationSet Name="Table_Conversion" Association="Self.Table_Conversion">
+            <End Role="Conversions" EntitySet="Conversions" />
+            <End Role="Tables" EntitySet="Tables" />
+          </AssociationSet>
+          <AssociationSet Name="TableJoin_SourceTable" Association="Self.TableJoin_SourceTable">
+            <End Role="SourceTables" EntitySet="SourceTables" />
+            <End Role="TableJoins" EntitySet="TableJoins" />
+          </AssociationSet>
+          <AssociationSet Name="tblFldDet_FK00" Association="Self.tblFldDet_FK00">
+            <End Role="tblFldTyp" EntitySet="tblFldTyp" />
+            <End Role="tblFldDet" EntitySet="tblFldDet" />
+          </AssociationSet>
+          <AssociationSet Name="tblIdxFld_FK00" Association="Self.tblIdxFld_FK00">
+            <End Role="tblIdxHdr" EntitySet="tblIdxHdr" />
+            <End Role="tblIdxFld" EntitySet="tblIdxFld" />
+          </AssociationSet>
+          <AssociationSet Name="tblIdxHdr_FK00" Association="Self.tblIdxHdr_FK00">
+            <End Role="tblTblHdr" EntitySet="tblTblHdr" />
+            <End Role="tblIdxHdr" EntitySet="tblIdxHdr" />
+          </AssociationSet>
+          <AssociationSet Name="tblTblFld_FK00" Association="Self.tblTblFld_FK00">
+            <End Role="tblTblHdr" EntitySet="tblTblHdr" />
+            <End Role="tblTblFld" EntitySet="tblTblFld" />
+          </AssociationSet>
+          <AssociationSet Name="tblTblFld_FK01" Association="Self.tblTblFld_FK01">
+            <End Role="tblFldDet" EntitySet="tblFldDet" />
+            <End Role="tblTblFld" EntitySet="tblTblFld" />
+          </AssociationSet>
+          <AssociationSet Name="tblVewFld_FK00" Association="Self.tblVewFld_FK00">
+            <End Role="tblVewHdr" EntitySet="tblVewHdr" />
+            <End Role="tblVewFld" EntitySet="tblVewFld" />
+          </AssociationSet>
+          <AssociationSet Name="tblVewFld_FK01" Association="Self.tblVewFld_FK01">
+            <End Role="tblFldDet" EntitySet="tblFldDet" />
+            <End Role="tblVewFld" EntitySet="tblVewFld" />
+          </AssociationSet>
+          <AssociationSet Name="tblVewJon_FK00" Association="Self.tblVewJon_FK00">
+            <End Role="tblVewHdr" EntitySet="tblVewHdr" />
+            <End Role="tblVewJon" EntitySet="tblVewJon" />
+          </AssociationSet>
+          <AssociationSet Name="tblVewJon_FK01" Association="Self.tblVewJon_FK01">
+            <End Role="tblJonOpr" EntitySet="tblJonOpr" />
+            <End Role="tblVewJon" EntitySet="tblVewJon" />
+          </AssociationSet>
+          <AssociationSet Name="tblVewJon_FK02" Association="Self.tblVewJon_FK02">
+            <End Role="tblJonTyp" EntitySet="tblJonTyp" />
+            <End Role="tblVewJon" EntitySet="tblVewJon" />
+          </AssociationSet>
+          <AssociationSet Name="UserSampleTemplate_Table" Association="Self.UserSampleTemplate_Table">
+            <End Role="Tables" EntitySet="Tables" />
+            <End Role="UserSampleTemplates" EntitySet="UserSampleTemplates" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="E1ValidationManagerModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Conversion">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RowVersion" Type="Binary" MaxLength="8" FixedLength="true" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="Code" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DisplayName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Owner" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Tables" Relationship="Self.Table_Conversion" FromRole="Conversions" ToRole="Tables" />
+        </EntityType>
+        <EntityType Name="Error">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ErrorMessage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="User" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Sample">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RowVersion" Type="Binary" MaxLength="8" FixedLength="true" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="SampleName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <Property Name="Sample_Table1" Type="Int32" Nullable="false" />
+          <Property Name="Sample_SourceTable" Type="Int32" Nullable="false" />
+          <Property Name="Site_Sample" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="SourceTable" Relationship="Self.Sample_SourceTable" FromRole="Samples" ToRole="SourceTables" />
+          <NavigationProperty Name="Table" Relationship="Self.Sample_Table" FromRole="Samples" ToRole="Tables" />
+          <NavigationProperty Name="Site" Relationship="Self.Site_Sample" FromRole="Samples" ToRole="Sites" />
+          <NavigationProperty Name="SampleValues" Relationship="E1ValidationManagerModel.SampleValue_Sample" FromRole="Sample" ToRole="SampleValue" />
+          </EntityType>
+        <EntityType Name="Site">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RowVersion" Type="Binary" MaxLength="8" FixedLength="true" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="CompanyNumber" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SiteName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Owner" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Samples" Relationship="Self.Site_Sample" FromRole="Sites" ToRole="Samples" />
+        </EntityType>
+        <EntityType Name="SourceTable">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RowVersion" Type="Binary" MaxLength="8" FixedLength="true" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="SourceTableName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IsE1" Type="Boolean" Nullable="false" />
+          <Property Name="ConvTableSource_ConvTable" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Samples" Relationship="Self.Sample_SourceTable" FromRole="SourceTables" ToRole="Samples" />
+          <NavigationProperty Name="Table" Relationship="Self.SourceTable_Table" FromRole="SourceTables" ToRole="Tables" />
+          <NavigationProperty Name="TableJoins" Relationship="Self.TableJoin_SourceTable" FromRole="SourceTables" ToRole="TableJoins" />
+          <NavigationProperty Name="TableHeader" Relationship="E1ValidationManagerModel.SourceTableTableHeader" FromRole="SourceTable" ToRole="TableHeader" />
+          <Property Name="PrimarySource" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="TableJoin">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RowVersion" Type="Binary" MaxLength="8" FixedLength="true" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="SourceFieldName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ConvFieldName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SourceTableName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ConvTableName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TableJoins_SourceTables" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="SourceTable" Relationship="Self.TableJoin_SourceTable" FromRole="TableJoins" ToRole="SourceTables" />
+          <NavigationProperty Name="ConversionField" Relationship="E1ValidationManagerModel.TableJoinTableField" FromRole="TableJoin" ToRole="TableField" />
+          <NavigationProperty Name="SourceField" Relationship="E1ValidationManagerModel.SourceField" FromRole="TableJoin" ToRole="TableField" />
+          <NavigationProperty Name="SampleValues" Relationship="E1ValidationManagerModel.SampleValue_TableJoin" FromRole="TableJoin" ToRole="SampleValue" />
+          </EntityType>
+        <EntityType Name="Table">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RowVersion" Type="Binary" MaxLength="8" FixedLength="true" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="TableName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Status" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Priority" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="HasConversionDoc" Type="Boolean" Nullable="false" />
+          <Property Name="IssueScreenshot" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="UseSampleData" Type="Boolean" Nullable="false" />
+          <Property Name="Table_Conversion" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Conversion" Relationship="Self.Table_Conversion" FromRole="Tables" ToRole="Conversions" />
+          <NavigationProperty Name="Samples" Relationship="Self.Sample_Table" FromRole="Tables" ToRole="Samples" />
+          <NavigationProperty Name="SourceTables" Relationship="Self.SourceTable_Table" FromRole="Tables" ToRole="SourceTables" />
+          <NavigationProperty Name="SampleTemplates" Relationship="E1ValidationManagerModel.SampleTemplate_Table" FromRole="Table" ToRole="SampleTemplate" />
+          <NavigationProperty Name="UserSampleTemplates" Relationship="E1ValidationManagerModel.UserSampleTemplate_Table" FromRole="Table" ToRole="UserSampleTemplate" />
+          <Property Name="GetSampleDatafromE1" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="FieldDetail">
+          <Key>
+            <PropertyRef Name="FldAlias" />
+          </Key>
+          <Property Name="FldAlias" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FldDesc" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="FldLength" Type="Double" />
+          <Property Name="FldDecml" Type="Int32" />
+          <Property Name="FldTyp" Type="Int16" />
+          <Property Name="FldDataItm" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="FldSys" Type="String" MaxLength="4" FixedLength="false" Unicode="true" />
+          <Property Name="FldUDC" Type="String" MaxLength="7" FixedLength="false" Unicode="true" />
+          <Property Name="FldNN" Type="String" MaxLength="7" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tblFldTyp" Relationship="Self.tblFldDet_FK00" FromRole="tblFldDet" ToRole="tblFldTyp" />
+          <NavigationProperty Name="tblTblFlds" Relationship="Self.tblTblFld_FK01" FromRole="tblFldDet" ToRole="tblTblFld" />
+          <NavigationProperty Name="tblVewFlds" Relationship="Self.tblVewFld_FK01" FromRole="tblFldDet" ToRole="tblVewFld" />
+        </EntityType>
+        <EntityType Name="FieldType">
+          <Key>
+            <PropertyRef Name="FldTyp" />
+          </Key>
+          <Property Name="FldTyp" Type="Int16" Nullable="false" />
+          <Property Name="FldTypDesc" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tblFldDets" Relationship="Self.tblFldDet_FK00" FromRole="tblFldTyp" ToRole="tblFldDet" />
+        </EntityType>
+        <EntityType Name="IndexField">
+          <Key>
+            <PropertyRef Name="TblId" />
+            <PropertyRef Name="IdxId" />
+            <PropertyRef Name="IdxPos" />
+          </Key>
+          <Property Name="TblId" Type="String" MaxLength="12" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IdxId" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IdxPos" Type="Int16" Nullable="false" />
+          <Property Name="FldAlias" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="SortOrdr" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tblIdxHdr" Relationship="Self.tblIdxFld_FK00" FromRole="tblIdxFld" ToRole="tblIdxHdr" />
+        </EntityType>
+        <EntityType Name="IndexHeader">
+          <Key>
+            <PropertyRef Name="TblId" />
+            <PropertyRef Name="IdxId" />
+          </Key>
+          <Property Name="TblId" Type="String" MaxLength="12" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IdxId" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IdxPrimary" Type="Boolean" />
+          <Property Name="IdxUnique" Type="Boolean" />
+          <Property Name="IdxDesc" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="IdxSeq" Type="Int16" />
+          <NavigationProperty Name="tblIdxFlds" Relationship="Self.tblIdxFld_FK00" FromRole="tblIdxHdr" ToRole="tblIdxFld" />
+          <NavigationProperty Name="tblTblHdr" Relationship="Self.tblIdxHdr_FK00" FromRole="tblIdxHdr" ToRole="tblTblHdr" />
+        </EntityType>
+        <EntityType Name="tblJonOpr">
+          <Key>
+            <PropertyRef Name="JoinOperator" />
+          </Key>
+          <Property Name="JoinOperator" Type="String" MaxLength="2" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="OperatorDisplay" Type="String" MaxLength="22" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tblVewJons" Relationship="Self.tblVewJon_FK01" FromRole="tblJonOpr" ToRole="tblVewJon" />
+        </EntityType>
+        <EntityType Name="tblJonTyp">
+          <Key>
+            <PropertyRef Name="JoinType" />
+          </Key>
+          <Property Name="JoinType" Type="String" MaxLength="2" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TypeDisplay" Type="String" MaxLength="22" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tblVewJons" Relationship="Self.tblVewJon_FK02" FromRole="tblJonTyp" ToRole="tblVewJon" />
+        </EntityType>
+        <EntityType Name="TableField">
+          <Key>
+            <PropertyRef Name="TableName" />
+            <PropertyRef Name="FieldName" />
+          </Key>
+          <Property Name="TableName" Type="String" MaxLength="12" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FieldName" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Position" Type="Int16" />
+          <Property Name="IndexType" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="FieldDetails" Relationship="Self.tblTblFld_FK01" FromRole="tblTblFld" ToRole="tblFldDet" />
+          <NavigationProperty Name="TableHeader" Relationship="Self.tblTblFld_FK00" FromRole="tblTblFld" ToRole="tblTblHdr" />
+          <NavigationProperty Name="TableJoins" Relationship="E1ValidationManagerModel.TableJoinTableField" FromRole="TableField" ToRole="TableJoin" />
+          <NavigationProperty Name="TableJoins1" Relationship="E1ValidationManagerModel.SourceField" FromRole="TableField" ToRole="TableJoin" />
+        </EntityType>
+        <EntityType Name="TableHeader">
+          <Key>
+            <PropertyRef Name="TableName" />
+          </Key>
+          <Property Name="TableName" Type="String" MaxLength="12" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TblDesc" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="FieldPrefix" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Name="TblSy" Type="String" MaxLength="4" FixedLength="false" Unicode="true" />
+          <Property Name="TblSyr" Type="String" MaxLength="4" FixedLength="false" Unicode="true" />
+          <Property Name="TblDATP" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="IndexHeaders" Relationship="Self.tblIdxHdr_FK00" FromRole="tblTblHdr" ToRole="tblIdxHdr" />
+          <NavigationProperty Name="TableFields" Relationship="Self.tblTblFld_FK00" FromRole="tblTblHdr" ToRole="tblTblFld" />
+          <NavigationProperty Name="SourceTable" Relationship="E1ValidationManagerModel.SourceTableTableHeader" FromRole="TableHeader" ToRole="SourceTable" />
+        </EntityType>
+        <EntityType Name="tblVewFld">
+          <Key>
+            <PropertyRef Name="VewId" />
+            <PropertyRef Name="FldPos" />
+          </Key>
+          <Property Name="VewId" Type="String" MaxLength="12" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FldPos" Type="Int16" Nullable="false" />
+          <Property Name="TblId" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
+          <Property Name="FldAlias" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="FldIdx" Type="Int16" />
+          <NavigationProperty Name="tblFldDet" Relationship="Self.tblVewFld_FK01" FromRole="tblVewFld" ToRole="tblFldDet" />
+          <NavigationProperty Name="tblVewHdr" Relationship="Self.tblVewFld_FK00" FromRole="tblVewFld" ToRole="tblVewHdr" />
+        </EntityType>
+        <EntityType Name="tblVewHdr">
+          <Key>
+            <PropertyRef Name="VewId" />
+          </Key>
+          <Property Name="VewId" Type="String" MaxLength="12" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="VewDesc" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="VewSy" Type="String" MaxLength="4" FixedLength="false" Unicode="true" />
+          <Property Name="VewSyr" Type="String" MaxLength="4" FixedLength="false" Unicode="true" />
+          <Property Name="VewUnion" Type="Boolean" />
+          <Property Name="VewDistinct" Type="Boolean" />
+          <Property Name="VewPrim" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tblVewFlds" Relationship="Self.tblVewFld_FK00" FromRole="tblVewHdr" ToRole="tblVewFld" />
+          <NavigationProperty Name="tblVewJons" Relationship="Self.tblVewJon_FK00" FromRole="tblVewHdr" ToRole="tblVewJon" />
+        </EntityType>
+        <EntityType Name="tblVewJon">
+          <Key>
+            <PropertyRef Name="VewId" />
+            <PropertyRef Name="JoinId" />
+          </Key>
+          <Property Name="VewId" Type="String" MaxLength="12" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="JoinId" Type="Int16" Nullable="false" />
+          <Property Name="TblIdLeft" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
+          <Property Name="FldAliasLeft" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="JoinOperator" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Name="JoinType" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Name="TblIdRight" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
+          <Property Name="FldAliasRight" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tblJonOpr" Relationship="Self.tblVewJon_FK01" FromRole="tblVewJon" ToRole="tblJonOpr" />
+          <NavigationProperty Name="tblJonTyp" Relationship="Self.tblVewJon_FK02" FromRole="tblVewJon" ToRole="tblJonTyp" />
+          <NavigationProperty Name="tblVewHdr" Relationship="Self.tblVewJon_FK00" FromRole="tblVewJon" ToRole="tblVewHdr" />
+        </EntityType>
+        <EntityType Name="XRef">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="WorldValue" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="E1Value" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FieldType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TableName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="Table_Conversion">
+          <End Role="Conversions" Type="Self.Conversion" Multiplicity="1" />
+          <End Role="Tables" Type="Self.Table" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Conversions">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Tables">
+              <PropertyRef Name="Table_Conversion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Sample_SourceTable">
+          <End Role="SourceTables" Type="Self.SourceTable" Multiplicity="1" />
+          <End Role="Samples" Type="Self.Sample" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SourceTables">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Samples">
+              <PropertyRef Name="Sample_SourceTable" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Sample_Table">
+          <End Role="Tables" Type="Self.Table" Multiplicity="1" />
+          <End Role="Samples" Type="Self.Sample" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tables">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Samples">
+              <PropertyRef Name="Sample_Table1" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Site_Sample">
+          <End Role="Sites" Type="Self.Site" Multiplicity="1" />
+          <End Role="Samples" Type="Self.Sample" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sites">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Samples">
+              <PropertyRef Name="Site_Sample" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="SourceTable_Table">
+          <End Role="Tables" Type="Self.Table" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="SourceTables" Type="Self.SourceTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tables">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SourceTables">
+              <PropertyRef Name="ConvTableSource_ConvTable" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TableJoin_SourceTable">
+          <End Role="SourceTables" Type="Self.SourceTable" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TableJoins" Type="Self.TableJoin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SourceTables">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TableJoins">
+              <PropertyRef Name="TableJoins_SourceTables" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="tblFldDet_FK00">
+          <End Role="tblFldTyp" Type="E1ValidationManagerModel.FieldType" Multiplicity="0..1" />
+          <End Role="tblFldDet" Type="E1ValidationManagerModel.FieldDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblFldTyp">
+              <PropertyRef Name="FldTyp" />
+            </Principal>
+            <Dependent Role="tblFldDet">
+              <PropertyRef Name="FldTyp" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="tblTblFld_FK01">
+          <End Role="tblFldDet" Type="E1ValidationManagerModel.FieldDetail" Multiplicity="1" />
+          <End Role="tblTblFld" Type="E1ValidationManagerModel.TableField" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblFldDet">
+              <PropertyRef Name="FldAlias" />
+            </Principal>
+            <Dependent Role="tblTblFld">
+              <PropertyRef Name="FieldName" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="tblVewFld_FK01">
+          <End Role="tblFldDet" Type="E1ValidationManagerModel.FieldDetail" Multiplicity="0..1" />
+          <End Role="tblVewFld" Type="Self.tblVewFld" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblFldDet">
+              <PropertyRef Name="FldAlias" />
+            </Principal>
+            <Dependent Role="tblVewFld">
+              <PropertyRef Name="FldAlias" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="tblIdxFld_FK00">
+          <End Role="tblIdxHdr" Type="E1ValidationManagerModel.IndexHeader" Multiplicity="1" />
+          <End Role="tblIdxFld" Type="E1ValidationManagerModel.IndexField" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblIdxHdr">
+              <PropertyRef Name="TblId" />
+              <PropertyRef Name="IdxId" />
+            </Principal>
+            <Dependent Role="tblIdxFld">
+              <PropertyRef Name="TblId" />
+              <PropertyRef Name="IdxId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="tblIdxHdr_FK00">
+          <End Role="tblTblHdr" Type="E1ValidationManagerModel.TableHeader" Multiplicity="1" />
+          <End Role="tblIdxHdr" Type="E1ValidationManagerModel.IndexHeader" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblTblHdr">
+              <PropertyRef Name="TableName" />
+            </Principal>
+            <Dependent Role="tblIdxHdr">
+              <PropertyRef Name="TblId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="tblVewJon_FK01">
+          <End Role="tblJonOpr" Type="Self.tblJonOpr" Multiplicity="0..1" />
+          <End Role="tblVewJon" Type="Self.tblVewJon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblJonOpr">
+              <PropertyRef Name="JoinOperator" />
+            </Principal>
+            <Dependent Role="tblVewJon">
+              <PropertyRef Name="JoinOperator" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="tblVewJon_FK02">
+          <End Role="tblJonTyp" Type="Self.tblJonTyp" Multiplicity="0..1" />
+          <End Role="tblVewJon" Type="Self.tblVewJon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblJonTyp">
+              <PropertyRef Name="JoinType" />
+            </Principal>
+            <Dependent Role="tblVewJon">
+              <PropertyRef Name="JoinType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="tblTblFld_FK00">
+          <End Role="tblTblHdr" Type="E1ValidationManagerModel.TableHeader" Multiplicity="1" />
+          <End Role="tblTblFld" Type="E1ValidationManagerModel.TableField" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblTblHdr">
+              <PropertyRef Name="TableName" />
+            </Principal>
+            <Dependent Role="tblTblFld">
+              <PropertyRef Name="TableName" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="tblVewFld_FK00">
+          <End Role="tblVewHdr" Type="Self.tblVewHdr" Multiplicity="1" />
+          <End Role="tblVewFld" Type="Self.tblVewFld" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblVewHdr">
+              <PropertyRef Name="VewId" />
+            </Principal>
+            <Dependent Role="tblVewFld">
+              <PropertyRef Name="VewId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="tblVewJon_FK00">
+          <End Role="tblVewHdr" Type="Self.tblVewHdr" Multiplicity="1" />
+          <End Role="tblVewJon" Type="Self.tblVewJon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblVewHdr">
+              <PropertyRef Name="VewId" />
+            </Principal>
+            <Dependent Role="tblVewJon">
+              <PropertyRef Name="VewId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="E1ValidationEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Conversions" EntityType="Self.Conversion" />
+          <EntitySet Name="Errors" EntityType="Self.Error" />
+          <EntitySet Name="Samples" EntityType="Self.Sample" />
+          <EntitySet Name="Sites" EntityType="Self.Site" />
+          <EntitySet Name="SourceTables" EntityType="Self.SourceTable" />
+          <EntitySet Name="TableJoins" EntityType="Self.TableJoin" />
+          <EntitySet Name="Tables" EntityType="Self.Table" />
+          <EntitySet Name="FieldDetails" EntityType="E1ValidationManagerModel.FieldDetail" />
+          <EntitySet Name="FieldTypes" EntityType="E1ValidationManagerModel.FieldType" />
+          <EntitySet Name="IndexFields" EntityType="E1ValidationManagerModel.IndexField" />
+          <EntitySet Name="IndexHeaders" EntityType="E1ValidationManagerModel.IndexHeader" />
+          <EntitySet Name="tblJonOprs" EntityType="Self.tblJonOpr" />
+          <EntitySet Name="tblJonTyps" EntityType="Self.tblJonTyp" />
+          <EntitySet Name="TableFields" EntityType="E1ValidationManagerModel.TableField" />
+          <EntitySet Name="TableHeaders" EntityType="E1ValidationManagerModel.TableHeader" />
+          <EntitySet Name="tblVewFlds" EntityType="Self.tblVewFld" />
+          <EntitySet Name="tblVewHdrs" EntityType="Self.tblVewHdr" />
+          <EntitySet Name="tblVewJons" EntityType="Self.tblVewJon" />
+          <EntitySet Name="XRefs" EntityType="E1ValidationManagerModel.XRef" />
+          <AssociationSet Name="Table_Conversion" Association="Self.Table_Conversion">
+            <End Role="Conversions" EntitySet="Conversions" />
+            <End Role="Tables" EntitySet="Tables" />
+          </AssociationSet>
+          <AssociationSet Name="Sample_SourceTable" Association="Self.Sample_SourceTable">
+            <End Role="SourceTables" EntitySet="SourceTables" />
+            <End Role="Samples" EntitySet="Samples" />
+          </AssociationSet>
+          <AssociationSet Name="Sample_Table" Association="Self.Sample_Table">
+            <End Role="Tables" EntitySet="Tables" />
+            <End Role="Samples" EntitySet="Samples" />
+          </AssociationSet>
+          <AssociationSet Name="Site_Sample" Association="Self.Site_Sample">
+            <End Role="Sites" EntitySet="Sites" />
+            <End Role="Samples" EntitySet="Samples" />
+          </AssociationSet>
+          <AssociationSet Name="SourceTable_Table" Association="Self.SourceTable_Table">
+            <End Role="Tables" EntitySet="Tables" />
+            <End Role="SourceTables" EntitySet="SourceTables" />
+          </AssociationSet>
+          <AssociationSet Name="TableJoin_SourceTable" Association="Self.TableJoin_SourceTable">
+            <End Role="SourceTables" EntitySet="SourceTables" />
+            <End Role="TableJoins" EntitySet="TableJoins" />
+          </AssociationSet>
+          <AssociationSet Name="tblFldDet_FK00" Association="Self.tblFldDet_FK00">
+            <End Role="tblFldTyp" EntitySet="FieldTypes" />
+            <End Role="tblFldDet" EntitySet="FieldDetails" />
+          </AssociationSet>
+          <AssociationSet Name="tblTblFld_FK01" Association="Self.tblTblFld_FK01">
+            <End Role="tblFldDet" EntitySet="FieldDetails" />
+            <End Role="tblTblFld" EntitySet="TableFields" />
+          </AssociationSet>
+          <AssociationSet Name="tblVewFld_FK01" Association="Self.tblVewFld_FK01">
+            <End Role="tblFldDet" EntitySet="FieldDetails" />
+            <End Role="tblVewFld" EntitySet="tblVewFlds" />
+          </AssociationSet>
+          <AssociationSet Name="tblIdxFld_FK00" Association="Self.tblIdxFld_FK00">
+            <End Role="tblIdxHdr" EntitySet="IndexHeaders" />
+            <End Role="tblIdxFld" EntitySet="IndexFields" />
+          </AssociationSet>
+          <AssociationSet Name="tblIdxHdr_FK00" Association="Self.tblIdxHdr_FK00">
+            <End Role="tblTblHdr" EntitySet="TableHeaders" />
+            <End Role="tblIdxHdr" EntitySet="IndexHeaders" />
+          </AssociationSet>
+          <AssociationSet Name="tblVewJon_FK01" Association="Self.tblVewJon_FK01">
+            <End Role="tblJonOpr" EntitySet="tblJonOprs" />
+            <End Role="tblVewJon" EntitySet="tblVewJons" />
+          </AssociationSet>
+          <AssociationSet Name="tblVewJon_FK02" Association="Self.tblVewJon_FK02">
+            <End Role="tblJonTyp" EntitySet="tblJonTyps" />
+            <End Role="tblVewJon" EntitySet="tblVewJons" />
+          </AssociationSet>
+          <AssociationSet Name="tblTblFld_FK00" Association="Self.tblTblFld_FK00">
+            <End Role="tblTblHdr" EntitySet="TableHeaders" />
+            <End Role="tblTblFld" EntitySet="TableFields" />
+          </AssociationSet>
+          <AssociationSet Name="tblVewFld_FK00" Association="Self.tblVewFld_FK00">
+            <End Role="tblVewHdr" EntitySet="tblVewHdrs" />
+            <End Role="tblVewFld" EntitySet="tblVewFlds" />
+          </AssociationSet>
+          <AssociationSet Name="tblVewJon_FK00" Association="Self.tblVewJon_FK00">
+            <End Role="tblVewHdr" EntitySet="tblVewHdrs" />
+            <End Role="tblVewJon" EntitySet="tblVewJons" />
+          </AssociationSet>
+          <FunctionImport Name="sp_GetSiteID" ReturnType="Collection(Int32)">
+          <Parameter Name="sitename" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_GetTableJoinIDFromFieldName" ReturnType="Collection(Int32)">
+            <Parameter Name="fieldName" Mode="In" Type="String" />
+            <Parameter Name="TableName" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="InsertNewSampleValue">
+            <Parameter Name="TableValue" Mode="In" Type="String" />
+            <Parameter Name="SampleID" Mode="In" Type="Int32" />
+            <Parameter Name="FieldName" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="InsertNewSample" ReturnType="Collection(Decimal)">
+            <Parameter Name="TableName" Mode="In" Type="String" />
+            <Parameter Name="SampleDataName" Mode="In" Type="String" />
+            <Parameter Name="SiteID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_LogError">
+            <Parameter Name="message" Mode="In" Type="String" />
+            <Parameter Name="user" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="usp_Delete_Samples">
+            <Parameter Name="SiteID" Mode="In" Type="Int32" />
+            <Parameter Name="TableName" Mode="In" Type="String" />
+          </FunctionImport>
+          <AssociationSet Name="ConversionField" Association="E1ValidationManagerModel.TableJoinTableField">
+            <End Role="TableJoin" EntitySet="TableJoins" />
+            <End Role="TableField" EntitySet="TableFields" />
+          </AssociationSet>
+          <AssociationSet Name="SourceField" Association="E1ValidationManagerModel.SourceField">
+            <End Role="TableJoin" EntitySet="TableJoins" />
+            <End Role="TableField" EntitySet="TableFields" />
+          </AssociationSet>
+          <EntitySet Name="TableFields1" EntityType="E1ValidationManagerModel.TableFields" />
+          <EntitySet Name="SampleTemplates" EntityType="E1ValidationManagerModel.SampleTemplate" />
+          <AssociationSet Name="SampleTemplate_Table" Association="E1ValidationManagerModel.SampleTemplate_Table">
+            <End Role="Table" EntitySet="Tables" />
+            <End Role="SampleTemplate" EntitySet="SampleTemplates" />
+          </AssociationSet>
+          <EntitySet Name="UserSampleTemplates" EntityType="E1ValidationManagerModel.UserSampleTemplate" />
+          <AssociationSet Name="UserSampleTemplate_Table" Association="E1ValidationManagerModel.UserSampleTemplate_Table">
+            <End Role="Table" EntitySet="Tables" />
+            <End Role="UserSampleTemplate" EntitySet="UserSampleTemplates" />
+          </AssociationSet>
+          <AssociationSet Name="UserSampleTemplateTableFields" Association="E1ValidationManagerModel.UserSampleTemplateTableFields">
+            <End Role="UserSampleTemplate" EntitySet="UserSampleTemplates" />
+            <End Role="TableFields" EntitySet="TableFields1" />
+          </AssociationSet>
+          <AssociationSet Name="SampleTemplateTableFields" Association="E1ValidationManagerModel.SampleTemplateTableFields">
+            <End Role="SampleTemplate" EntitySet="SampleTemplates" />
+            <End Role="TableFields" EntitySet="TableFields1" />
+          </AssociationSet>
+          <EntitySet Name="SampleValues" EntityType="E1ValidationManagerModel.SampleValue" />
+          <AssociationSet Name="SampleValue_Sample" Association="E1ValidationManagerModel.SampleValue_Sample">
+            <End Role="Sample" EntitySet="Samples" />
+            <End Role="SampleValue" EntitySet="SampleValues" />
+          </AssociationSet>
+          <AssociationSet Name="SampleValue_TableJoin" Association="E1ValidationManagerModel.SampleValue_TableJoin">
+            <End Role="TableJoin" EntitySet="TableJoins" />
+            <End Role="SampleValue" EntitySet="SampleValues" />
+          </AssociationSet>
+          <AssociationSet Name="SourceTableTableHeader" Association="E1ValidationManagerModel.SourceTableTableHeader">
+            <End Role="SourceTable" EntitySet="SourceTables" />
+            <End Role="TableHeader" EntitySet="TableHeaders" />
+          </AssociationSet>
+          </EntityContainer>
+        <Association Name="TableJoinTableField">
+          <End Type="E1ValidationManagerModel.TableJoin" Role="TableJoin" Multiplicity="*" />
+          <End Type="E1ValidationManagerModel.TableField" Role="TableField" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="TableField">
+              <PropertyRef Name="TableName" />
+              <PropertyRef Name="FieldName" />
+            </Principal>
+            <Dependent Role="TableJoin">
+              <PropertyRef Name="ConvTableName" />
+              <PropertyRef Name="ConvFieldName" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="SourceField">
+          <End Type="E1ValidationManagerModel.TableJoin" Role="TableJoin" Multiplicity="*" />
+          <End Type="E1ValidationManagerModel.TableField" Role="TableField" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="TableField">
+              <PropertyRef Name="TableName" />
+              <PropertyRef Name="FieldName" />
+            </Principal>
+            <Dependent Role="TableJoin">
+              <PropertyRef Name="SourceTableName" />
+              <PropertyRef Name="SourceFieldName" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="TableFields">
+          <Key>
+            <PropertyRef Name="TableName" />
+            <PropertyRef Name="FieldName" />
+          </Key>
+          <Property Name="TableName" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="true" />
+          <Property Name="FieldName" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="FieldDescription" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="UserSampleTemplates" Relationship="E1ValidationManagerModel.UserSampleTemplateTableFields" FromRole="TableFields" ToRole="UserSampleTemplate" />
+          <NavigationProperty Name="SampleTemplates" Relationship="E1ValidationManagerModel.SampleTemplateTableFields" FromRole="TableFields" ToRole="SampleTemplate" />
+        </EntityType>
+        <EntityType Name="SampleTemplate">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RowVersion" Type="Binary" Nullable="false" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="TableField_TableName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="TableField_FieldName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="SampleTemplate_Table" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Table" Relationship="E1ValidationManagerModel.SampleTemplate_Table" FromRole="SampleTemplate" ToRole="Table" />
+          <NavigationProperty Name="TableField" Relationship="E1ValidationManagerModel.SampleTemplateTableFields" FromRole="SampleTemplate" ToRole="TableFields" />
+        </EntityType>
+        <Association Name="SampleTemplate_Table">
+          <End Type="E1ValidationManagerModel.Table" Role="Table" Multiplicity="1" />
+          <End Type="E1ValidationManagerModel.SampleTemplate" Role="SampleTemplate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Table">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SampleTemplate">
+              <PropertyRef Name="SampleTemplate_Table" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="UserSampleTemplate">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RowVersion" Type="Binary" Nullable="false" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="TableField_TableName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="TableField_FieldName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="UserSampleDefninition_Table" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Table" Relationship="E1ValidationManagerModel.UserSampleTemplate_Table" FromRole="UserSampleTemplate" ToRole="Table" />
+          <NavigationProperty Name="TableField" Relationship="E1ValidationManagerModel.UserSampleTemplateTableFields" FromRole="UserSampleTemplate" ToRole="TableFields" />
+        </EntityType>
+        <Association Name="UserSampleTemplate_Table">
+          <End Type="E1ValidationManagerModel.Table" Role="Table" Multiplicity="1" />
+          <End Type="E1ValidationManagerModel.UserSampleTemplate" Role="UserSampleTemplate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Table">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserSampleTemplate">
+              <PropertyRef Name="UserSampleDefninition_Table" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UserSampleTemplateTableFields">
+          <End Type="E1ValidationManagerModel.UserSampleTemplate" Role="UserSampleTemplate" Multiplicity="*" />
+          <End Type="E1ValidationManagerModel.TableFields" Role="TableFields" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="TableFields">
+              <PropertyRef Name="TableName" />
+              <PropertyRef Name="FieldName" />
+            </Principal>
+            <Dependent Role="UserSampleTemplate">
+              <PropertyRef Name="TableField_TableName" />
+              <PropertyRef Name="TableField_FieldName" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="SampleTemplateTableFields">
+          <End Type="E1ValidationManagerModel.SampleTemplate" Role="SampleTemplate" Multiplicity="*" />
+          <End Type="E1ValidationManagerModel.TableFields" Role="TableFields" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="TableFields">
+              <PropertyRef Name="TableName" />
+              <PropertyRef Name="FieldName" />
+            </Principal>
+            <Dependent Role="SampleTemplate">
+              <PropertyRef Name="TableField_TableName" />
+              <PropertyRef Name="TableField_FieldName" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="SampleValue">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RowVersion" Type="Binary" Nullable="false" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="TableValue" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="FieldName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="SampleValue_Sample" Type="Int32" Nullable="false" />
+          <Property Name="SampleValue_TableJoin" Type="Int32" />
+          <NavigationProperty Name="Sample" Relationship="E1ValidationManagerModel.SampleValue_Sample" FromRole="SampleValue" ToRole="Sample" />
+          <NavigationProperty Name="TableJoin" Relationship="E1ValidationManagerModel.SampleValue_TableJoin" FromRole="SampleValue" ToRole="TableJoin" />
+        </EntityType>
+        <Association Name="SampleValue_Sample">
+          <End Type="E1ValidationManagerModel.Sample" Role="Sample" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="E1ValidationManagerModel.SampleValue" Role="SampleValue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sample">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SampleValue">
+              <PropertyRef Name="SampleValue_Sample" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="SampleValue_TableJoin">
+          <End Type="E1ValidationManagerModel.TableJoin" Role="TableJoin" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="E1ValidationManagerModel.SampleValue" Role="SampleValue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TableJoin">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SampleValue">
+              <PropertyRef Name="SampleValue_TableJoin" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="SourceTableTableHeader">
+          <End Type="E1ValidationManagerModel.SourceTable" Role="SourceTable" Multiplicity="*" />
+          <End Type="E1ValidationManagerModel.TableHeader" Role="TableHeader" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="TableHeader">
+              <PropertyRef Name="TableName" />
+            </Principal>
+            <Dependent Role="SourceTable">
+              <PropertyRef Name="SourceTableName" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="E1ValidationManagerModelStoreContainer" CdmEntityContainer="E1ValidationEntities">
+          <EntitySetMapping Name="Conversions">
+            <EntityTypeMapping TypeName="E1ValidationManagerModel.Conversion">
+              <MappingFragment StoreEntitySet="Conversions">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="RowVersion" ColumnName="RowVersion" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Errors">
+            <EntityTypeMapping TypeName="E1ValidationManagerModel.Error">
+              <MappingFragment StoreEntitySet="Errors">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ErrorMessage" ColumnName="ErrorMessage" />
+                <ScalarProperty Name="User" ColumnName="User" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Samples">
+            <EntityTypeMapping TypeName="E1ValidationManagerModel.Sample">
+              <MappingFragment StoreEntitySet="Samples">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="RowVersion" ColumnName="RowVersion" />
+                <ScalarProperty Name="SampleName" ColumnName="SampleName" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Sample_Table1" ColumnName="Sample_Table1" />
+                <ScalarProperty Name="Sample_SourceTable" ColumnName="Sample_SourceTable" />
+                <ScalarProperty Name="Site_Sample" ColumnName="Site_Sample" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sites">
+            <EntityTypeMapping TypeName="E1ValidationManagerModel.Site">
+              <MappingFragment StoreEntitySet="Sites">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="RowVersion" ColumnName="RowVersion" />
+                <ScalarProperty Name="CompanyNumber" ColumnName="CompanyNumber" />
+                <ScalarProperty Name="SiteName" ColumnName="SiteName" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SourceTables">
+            <EntityTypeMapping TypeName="E1ValidationManagerModel.SourceTable">
+              <MappingFragment StoreEntitySet="SourceTables">
+                <ScalarProperty Name="PrimarySource" ColumnName="PrimarySource" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="RowVersion" ColumnName="RowVersion" />
+                <ScalarProperty Name="SourceTableName" ColumnName="SourceTableName" />
+                <ScalarProperty Name="IsE1" ColumnName="IsE1" />
+                <ScalarProperty Name="ConvTableSource_ConvTable" ColumnName="ConvTableSource_ConvTable" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TableJoins">
+            <EntityTypeMapping TypeName="E1ValidationManagerModel.TableJoin">
+              <MappingFragment StoreEntitySet="TableJoins">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="RowVersion" ColumnName="RowVersion" />
+                <ScalarProperty Name="SourceFieldName" ColumnName="SourceFieldName" />
+                <ScalarProperty Name="ConvFieldName" ColumnName="ConvFieldName" />
+                <ScalarProperty Name="SourceTableName" ColumnName="SourceTableName" />
+                <ScalarProperty Name="ConvTableName" ColumnName="ConvTableName" />
+                <ScalarProperty Name="TableJoins_SourceTables" ColumnName="TableJoins_SourceTables" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tables">
+            <EntityTypeMapping TypeName="E1ValidationManagerModel.Table">
+              <MappingFragment StoreEntitySet="Tables">
+                <ScalarProperty Name="GetSampleDatafromE1" ColumnName="GetSampleDatafromE1" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="RowVersion" ColumnName="RowVersion" />
+                <ScalarProperty Name="TableName" ColumnName="TableName" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Priority" ColumnName="Priority" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="HasConversionDoc" ColumnName="HasConversionDoc" />
+                <ScalarProperty Name="IssueScreenshot" ColumnName="IssueScreenshot" />
+                <ScalarProperty Name="UseSampleData" ColumnName="UseSampleData" />
+                <ScalarProperty Name="Table_Conversion" ColumnName="Table_Conversion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FieldDetails">
+            <EntityTypeMapping TypeName="E1ValidationManagerModel.FieldDetail">
+              <MappingFragment StoreEntitySet="tblFldDet">
+                <ScalarProperty Name="FldAlias" ColumnName="FldAlias" />
+                <ScalarProperty Name="FldDesc" ColumnName="FldDesc" />
+                <ScalarProperty Name="FldLength" ColumnName="FldLength" />
+                <ScalarProperty Name="FldDecml" ColumnName="FldDecml" />
+                <ScalarProperty Name="FldTyp" ColumnName="FldTyp" />
+                <ScalarProperty Name="FldDataItm" ColumnName="FldDataItm" />
+                <ScalarProperty Name="FldSys" ColumnName="FldSys" />
+                <ScalarProperty Name="FldUDC" ColumnName="FldUDC" />
+                <ScalarProperty Name="FldNN" ColumnName="FldNN" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FieldTypes">
+            <EntityTypeMapping TypeName="E1ValidationManagerModel.FieldType">
+              <MappingFragment StoreEntitySet="tblFldTyp">
+                <ScalarProperty Name="FldTyp" ColumnName="FldTyp" />
+                <ScalarProperty Name="FldTypDesc" ColumnName="FldTypDesc" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="IndexFields">
+            <EntityTypeMapping TypeName="E1ValidationManagerModel.IndexField">
+              <MappingFragment StoreEntitySet="tblIdxFld">
+                <ScalarProperty Name="TblId" ColumnName="TblId" />
+                <ScalarProperty Name="IdxId" ColumnName="IdxId" />
+                <ScalarProperty Name="IdxPos" ColumnName="IdxPos" />
+                <ScalarProperty Name="FldAlias" ColumnName="FldAlias" />
+                <ScalarProperty Name="SortOrdr" ColumnName="SortOrdr" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="IndexHeaders">
+            <EntityTypeMapping TypeName="E1ValidationManagerModel.IndexHeader">
+              <MappingFragment StoreEntitySet="tblIdxHdr">
+                <ScalarProperty Name="TblId" ColumnName="TblId" />
+                <ScalarProperty Name="IdxId" ColumnName="IdxId" />
+                <ScalarProperty Name="IdxPrimary" ColumnName="IdxPrimary" />
+                <ScalarProperty Name="IdxUnique" ColumnName="IdxUnique" />
+                <ScalarProperty Name="IdxDesc" ColumnName="IdxDesc" />
+                <ScalarProperty Name="IdxSeq" ColumnName="IdxSeq" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblJonOprs">
+            <EntityTypeMapping TypeName="E1ValidationManagerModel.tblJonOpr">
+              <MappingFragment StoreEntitySet="tblJonOpr">
+                <ScalarProperty Name="JoinOperator" ColumnName="JoinOperator" />
+                <ScalarProperty Name="OperatorDisplay" ColumnName="OperatorDisplay" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblJonTyps">
+            <EntityTypeMapping TypeName="E1ValidationManagerModel.tblJonTyp">
+              <MappingFragment StoreEntitySet="tblJonTyp">
+                <ScalarProperty Name="JoinType" ColumnName="JoinType" />
+                <ScalarProperty Name="TypeDisplay" ColumnName="TypeDisplay" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TableFields">
+            <EntityTypeMapping TypeName="E1ValidationManagerModel.TableField">
+              <MappingFragment StoreEntitySet="tblTblFld">
+                <ScalarProperty Name="TableName" ColumnName="TblId" />
+                <ScalarProperty Name="FieldName" ColumnName="FldAlias" />
+                <ScalarProperty Name="Position" ColumnName="FldPos" />
+                <ScalarProperty Name="IndexType" ColumnName="FldIdx" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TableHeaders">
+            <EntityTypeMapping TypeName="E1ValidationManagerModel.TableHeader">
+              <MappingFragment StoreEntitySet="tblTblHdr">
+                <ScalarProperty Name="TableName" ColumnName="TblId" />
+                <ScalarProperty Name="TblDesc" ColumnName="TblDesc" />
+                <ScalarProperty Name="FieldPrefix" ColumnName="TblFldPrefix" />
+                <ScalarProperty Name="TblSy" ColumnName="TblSy" />
+                <ScalarProperty Name="TblSyr" ColumnName="TblSyr" />
+                <ScalarProperty Name="TblDATP" ColumnName="TblDATP" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblVewFlds">
+            <EntityTypeMapping TypeName="E1ValidationManagerModel.tblVewFld">
+              <MappingFragment StoreEntitySet="tblVewFld">
+                <ScalarProperty Name="VewId" ColumnName="VewId" />
+                <ScalarProperty Name="FldPos" ColumnName="FldPos" />
+                <ScalarProperty Name="TblId" ColumnName="TblId" />
+                <ScalarProperty Name="FldAlias" ColumnName="FldAlias" />
+                <ScalarProperty Name="FldIdx" ColumnName="FldIdx" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblVewHdrs">
+            <EntityTypeMapping TypeName="E1ValidationManagerModel.tblVewHdr">
+              <MappingFragment StoreEntitySet="tblVewHdr">
+                <ScalarProperty Name="VewId" ColumnName="VewId" />
+                <ScalarProperty Name="VewDesc" ColumnName="VewDesc" />
+                <ScalarProperty Name="VewSy" ColumnName="VewSy" />
+                <ScalarProperty Name="VewSyr" ColumnName="VewSyr" />
+                <ScalarProperty Name="VewUnion" ColumnName="VewUnion" />
+                <ScalarProperty Name="VewDistinct" ColumnName="VewDistinct" />
+                <ScalarProperty Name="VewPrim" ColumnName="VewPrim" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblVewJons">
+            <EntityTypeMapping TypeName="E1ValidationManagerModel.tblVewJon">
+              <MappingFragment StoreEntitySet="tblVewJon">
+                <ScalarProperty Name="VewId" ColumnName="VewId" />
+                <ScalarProperty Name="JoinId" ColumnName="JoinId" />
+                <ScalarProperty Name="TblIdLeft" ColumnName="TblIdLeft" />
+                <ScalarProperty Name="FldAliasLeft" ColumnName="FldAliasLeft" />
+                <ScalarProperty Name="JoinOperator" ColumnName="JoinOperator" />
+                <ScalarProperty Name="JoinType" ColumnName="JoinType" />
+                <ScalarProperty Name="TblIdRight" ColumnName="TblIdRight" />
+                <ScalarProperty Name="FldAliasRight" ColumnName="FldAliasRight" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="XRefs">
+            <EntityTypeMapping TypeName="E1ValidationManagerModel.XRef">
+              <MappingFragment StoreEntitySet="tblXref">
+                <ScalarProperty Name="TableName" ColumnName="TableName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="WorldValue" ColumnName="WorldValue" />
+                <ScalarProperty Name="E1Value" ColumnName="E1Value" />
+                <ScalarProperty Name="FieldType" ColumnName="FieldType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_GetSiteID" FunctionName="E1ValidationManagerModel.Store.sp_GetSiteID" />
+          <FunctionImportMapping FunctionImportName="sp_GetTableJoinIDFromFieldName" FunctionName="E1ValidationManagerModel.Store.sp_GetTableJoinIDFromFieldName" />
+          <FunctionImportMapping FunctionImportName="InsertNewSampleValue" FunctionName="E1ValidationManagerModel.Store.sp_InsertSampleDefinition" />
+          <FunctionImportMapping FunctionImportName="InsertNewSample" FunctionName="E1ValidationManagerModel.Store.sp_InsertSampleRecord" />
+          <FunctionImportMapping FunctionImportName="sp_LogError" FunctionName="E1ValidationManagerModel.Store.sp_LogError" />
+          <FunctionImportMapping FunctionImportName="usp_Delete_Samples" FunctionName="E1ValidationManagerModel.Store.usp_Delete_Samples" />
+          <EntitySetMapping Name="TableFields1">
+            <EntityTypeMapping TypeName="E1ValidationManagerModel.TableFields">
+              <MappingFragment StoreEntitySet="vw_TableFields">
+                <ScalarProperty Name="FieldDescription" ColumnName="FieldDescription" />
+                <ScalarProperty Name="FieldName" ColumnName="FieldName" />
+                <ScalarProperty Name="TableName" ColumnName="TableName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SampleTemplates">
+            <EntityTypeMapping TypeName="E1ValidationManagerModel.SampleTemplate">
+              <MappingFragment StoreEntitySet="SampleTemplates">
+                <ScalarProperty Name="SampleTemplate_Table" ColumnName="SampleTemplate_Table" />
+                <ScalarProperty Name="TableField_FieldName" ColumnName="TableField_FieldName" />
+                <ScalarProperty Name="TableField_TableName" ColumnName="TableField_TableName" />
+                <ScalarProperty Name="RowVersion" ColumnName="RowVersion" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserSampleTemplates">
+            <EntityTypeMapping TypeName="E1ValidationManagerModel.UserSampleTemplate">
+              <MappingFragment StoreEntitySet="UserSampleTemplates">
+                <ScalarProperty Name="UserSampleDefninition_Table" ColumnName="UserSampleDefninition_Table" />
+                <ScalarProperty Name="TableField_FieldName" ColumnName="TableField_FieldName" />
+                <ScalarProperty Name="TableField_TableName" ColumnName="TableField_TableName" />
+                <ScalarProperty Name="RowVersion" ColumnName="RowVersion" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SampleValues">
+            <EntityTypeMapping TypeName="E1ValidationManagerModel.SampleValue">
+              <MappingFragment StoreEntitySet="SampleValues">
+                <ScalarProperty Name="SampleValue_TableJoin" ColumnName="SampleValue_TableJoin" />
+                <ScalarProperty Name="SampleValue_Sample" ColumnName="SampleValue_Sample" />
+                <ScalarProperty Name="FieldName" ColumnName="FieldName" />
+                <ScalarProperty Name="TableValue" ColumnName="TableValue" />
+                <ScalarProperty Name="RowVersion" ColumnName="RowVersion" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
